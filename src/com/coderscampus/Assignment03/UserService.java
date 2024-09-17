@@ -2,12 +2,9 @@ package com.coderscampus.Assignment03;
 
 public class UserService {
 	public User createUser (String username, String password, String name) {
-		User user = new User();
+		User[] users = new User[4];
 		
-		user.setUsername("username");
-		user.setPassword("password");
-		user.setName("name");
-		return user;
+	
 		
 	}
 
