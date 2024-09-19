@@ -19,7 +19,7 @@ public class UserApplication {
 		String fullName = "";
 
 		while (attempts < 5 && !loginSuccess) {
-			User validatedUser = UserService.validateLogin(inputUsername, inputPassword);
+			User validatedUser = UserService.validateLogin(inputUsername.toLowerCase(), inputPassword);
 				if (validatedUser != null) {
 					loginSuccess = true;
 					fullName = validatedUser.getName();
