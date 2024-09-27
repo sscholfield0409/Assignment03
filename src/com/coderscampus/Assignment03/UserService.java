@@ -16,10 +16,11 @@ public class UserService {
 
 	// Method to read users from a file
 	private static User[] readUsersFromFile(String fileName) throws IOException {
-		BufferedReader fileReader = new BufferedReader(new FileReader("data.txt")); // Open the file for reading
+		BufferedReader fileReader = new BufferedReader(new FileReader(fileName)); // Open the file for reading
 		User[] users = new User[4]; // Initialize an array to hold the users
 		int length = 0; // Initialize the length variable to 0
 		String line; // Declare a variable to hold each line of data from the file
+		
 
 		// Read each line from the file
 		while ((line = fileReader.readLine()) != null) {
