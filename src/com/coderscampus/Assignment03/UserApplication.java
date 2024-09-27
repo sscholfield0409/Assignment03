@@ -18,27 +18,24 @@ public class UserApplication {
 		int attempts = 0; // Initialize an integer variable to track the number of login attempts
 		String fullName = ""; // Initialize a string variable to hold the user's full name
 
-		// Loop until the user has successfully logged in or until the maximum number of
-		// login attempts has been reached
-		while (attempts < 5 && !loginSuccess) {
+		while (attempts < 5 && !loginSuccess && inputUsername != null && inputPassword != null) {
+		    // If the maximum number of login attempts has been reached, notify the user that they are locked out
+		    if (attempts == 4) {
+		        System.out.println("Too many failed login attempts, you are now locked out");
+		        scanner.close(); // Close the Scanner object
+		        return; // Exit the program
+		    }
+
 			User validatedUser = userService.validateLogin(inputUsername.toLowerCase(), inputPassword); // Validate the
 																										// user's login
 																										// credentials
-
-			// Create an array of User objects and fill it with data
-			User[] users = new User[4];
-			for (int i = 0; i < 4; i++) {
-				users[i] = userService.createUser("user" + (i + 1), "password" + (i + 1), "fullName" + (i + 1));
-			}
 
 			// If the user's login credentials are valid, set the loginSuccess variable to
 			// true and set the fullName variable to the user's name
 			if (validatedUser == null) { // If the user is not validated, increment the attempts variable and prompt the
 											// user to try again (if there are login attempts remaining)
 				attempts++;
-				if (attempts == 5) { // If the login attempts have been exhausted, exit the loop
-					break;
-				}
+
 				System.out.println("Invalid login, please try again ");
 				System.out.println("Enter your email: ");
 				inputUsername = scanner.nextLine();
@@ -49,14 +46,12 @@ public class UserApplication {
 				loginSuccess = true;
 				fullName = validatedUser.getName();
 				System.out.println("Welcome " + fullName + "!");
-			}
 
-			// If the user was not able to log in successfully after the maximum number of
-			// login attempts has been reached, notify the user that they are locked out
-			if (!loginSuccess && attempts == 5) {
-				System.out.println("Too many failed login attempts, you are now locked out");
-				scanner.close(); // Close the Scanner object
-				return; // Exit the program
+				// Create an array of User objects and fill it with data
+				User[] users = new User[4];
+				for (int i = 0; i < 4; i++) {
+					users[i] = userService.createUser("user" + (i + 1), "password" + (i + 1), "fullName" + (i + 1));
+				}
 			}
 		}
 	}

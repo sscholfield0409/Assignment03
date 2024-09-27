@@ -4,6 +4,7 @@ public class User {
 	private String username;
 	private String password;
 	private String name;
+	private int length;
 	
 	 public User (String username, String password, String name) {
 		 this.username = username;
@@ -28,6 +29,14 @@ public class User {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public int getLength() {
+		return length;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
 	}
 	
 }
